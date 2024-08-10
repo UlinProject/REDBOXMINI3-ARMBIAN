@@ -1,16 +1,23 @@
 ### devicetree
 
-## *file: ./sunxi-h3-h5.dtsi
+## Usage
+```
+make
+```
+
+## License
+
+### *file: ./sunxi-h3-h5.dtsi
 Downloaded from open sources, no changes, licenses saved.
 
-## *file: ./sun8i-h3.dtsi
+### *file: ./sun8i-h3.dtsi
 Downloaded from open sources, no changes, licenses saved.
 
-## *file: ./sunxi-common-regulators.dtsi
+### *file: ./sunxi-common-regulators.dtsi
 Downloaded from open sources, no changes, licenses saved.
 
-## *dir: ./arm
+### *dir: ./arm
 Downloaded from open sources, no changes, licenses saved.
 
-## *dir: ./dt-bindings
+### *dir: ./dt-bindings
 Downloaded from open sources, no changes, licenses saved.
