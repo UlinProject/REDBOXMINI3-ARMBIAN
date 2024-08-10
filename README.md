@@ -18,7 +18,7 @@
 
 <b>CPU:</b> Allwinner H3 (armvh7, x4, 0.2Ghz-1.01Ghz)
 
-<b>MEM:</b> 1GB (DDR3, 336.00 GHz - 672.00 GHz <b>(1344.01 GHz works too)</b>)
+<b>MEM:</b> 1GB (DDR3)
 
 <b>Eth:</b> Internal (100mbit)
 
