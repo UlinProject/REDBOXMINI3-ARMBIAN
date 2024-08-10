@@ -35,3 +35,25 @@
 #### * V3 (115200, 3.3, image for allwinner h3 is identical to allwinner h5)
 
 <img src="./img/V1_uart.jpg" width="20%"></img>
+
+## Status
+
+Fully working machine (without wifi chip) based on x32 armbian, surprisingly much cooler than h5 version. Performance is more than enough for undemanding devices.
+
+## Quick Answers to Questions
+
+#### • Will there be support for 1.2/1.5 GHz processor frequencies?
+
+These devices use a constant 1.1V voltage, which cannot be adjusted. This means that higher processor frequencies like 1.2/1.5 GHz are not achievable. 
+
+#### • Will there be WI-FI support?
+
+WI-FI support is not currently available due to difficulties in obtaining compatible driver code. The chip itself is not very efficient for wireless communication, so wired connections (Ethernet or USB Wi-Fi) are preferred.
+
+#### • I2C support?
+
+I2C support is not available, as all I2C buses in the device tree are currently disabled. 
+
+## License
+
+All rights reserved.
