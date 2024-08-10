@@ -29,3 +29,9 @@
 <b>EMMC:</b> FORESEE MCEMAM6G-08G (booting from it works and tested on uboot-orange-pi-pc-plus)
 
 <b>GPIO:</b> LED_PWR (1c20800, 15-PA15), LED_STATUS (1f02c00, 362-PL10), IR (1f02c00, 363-PL11), KEY_RESET (1f02c00, 355-PL3) (On this board you can get absolutely any gpio that is available on allwinner h3 (I’m just giving a list of those pins that you can get without much effort).)
+
+## UART (DEBUG)
+
+#### * V3 (115200, 3.3, image for allwinner h3 is identical to allwinner h5)
+
+<img src="./img/V1_uart.jpg" width="20%"></img>
