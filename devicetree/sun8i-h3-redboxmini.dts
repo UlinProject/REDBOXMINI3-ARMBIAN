@@ -264,6 +264,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -276,6 +277,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -288,6 +290,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -300,6 +303,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -343,14 +347,6 @@
 &ir {
 	pinctrl-names = "default";
 	pinctrl-0 = <&r_ir_rx_pin>;
-	status = "okay";
-};
-
-&mmc0 { // sdcard
-	vmmc-supply = <&reg_vcc3v3>;
-	bus-width = <4>;
-	max-frequency = <50000000>;
-	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
 	status = "okay";
 };
 
@@ -426,15 +422,31 @@
 	clock-frequency = <200000>;
 };
 
-&mmc2 {
-	non-removable;
-	
-	bus-width = <8>;
+&mmc0 { // sdcard
+	vmmc-supply = <&reg_vcc3v3>;
+	bus-width = <4>;
 	max-frequency = <50000000>;
+	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
+	status = "okay";
+};
+
+&mmc1 { // wifi
+	status = "disabled";
+};
+
+&mmc2 { // emmc
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc2_8bit_pins>;
-	status = "okay";
 	vmmc-supply = <&reg_vcc3v3>;
+	bus-width = <8>;
+	non-removable;
+	cap-mmc-hw-reset;
+	status = "okay";
+};
 
-	mmc-ddr-3_3v;
+&mmc2_8bit_pins {
+	/* Increase drive strength for DDR modes */
+	drive-strength = <40>;
+	/* eMMC is missing pull-ups */
+	bias-pull-up;
 };
