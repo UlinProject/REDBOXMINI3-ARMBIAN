@@ -1,5 +1,5 @@
 
-// This build is a rework of redbox mini 5 (#UlinProject24, mit/apache2) 
+// This build is a rework of redbox mini 5 (#UlinProject, 2024-2025, mit/apache2) 
 // and orange pi pc (Copyright (C) 2015 Chen-Yu Tsai <wens@csie.org>, gpl/x11(mit))
 //
 
@@ -44,7 +44,7 @@
  *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  *     OTHER DEALINGS IN THE SOFTWARE.
  */
-// + #UlinProject24
+// + #UlinProject 2024-2025
 
 /dts-v1/;
 #include "sun8i-h3.dtsi"
@@ -54,7 +54,7 @@
 #include <dt-bindings/input/input.h>
 
 / {
-	model = "RedBox Mini, H3, UlinProject";
+	model = "RedBox Mini, H3, V2, UlinProject";
 	compatible = "redbox,m-h3", "allwinner,sun8i-h3";
 
 	aliases {
@@ -193,10 +193,10 @@
 		};
 
 		 opp-1200000000 {
-                        opp-hz = /bits/ 64 <1200000000>;
-                        opp-microvolt = <1320000 1320000 1320000 >;
-                        clock-latency-ns = <244144>; /* 8 32k periods */
-                };
+			opp-hz = /bits/ 64 <1200000000>;
+			opp-microvolt = <1320000 1320000 1320000 >;
+			clock-latency-ns = <244144>; /* 8 32k periods */
+		};
 	};
 	/delete-node/ thermal-zones;
 	thermal-zones {
