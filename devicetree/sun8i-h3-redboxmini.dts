@@ -198,41 +198,6 @@
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 	};
-	/delete-node/ thermal-zones;
-	thermal-zones {
-		cpu_thermal: cpu_thermal {
-			thermal-sensors = <&ths 0>;
-
-			polling-delay-passive = <1000>;
-			polling-delay = <10000>;
-
-			trips {
-				cpu_hot_trip: cpu-hot {
-					/* temperature = <90000>; !aosp VERSION! */
-					temperature = <80000>;
-					hysteresis = <2000>; /*aosp -0, OFF-2000?*/
-					type = "passive";
-				};
-
-				cpu_very_hot_trip: cpu-very-hot {
-					/* temperature = <100000>; !aosp VERSION, AND OFF! */
-					temperature = <95000>;
-					hysteresis = <0>;
-					type = "critical";
-				};
-			};
-
-			cooling-maps {
-				cpu-hot-limit {
-					trip = <&cpu_hot_trip>;
-					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-				};
-			};
-		};
-	};
 	idle-states { // not finished!!!
 		entry-method = "arm,psci";
 
