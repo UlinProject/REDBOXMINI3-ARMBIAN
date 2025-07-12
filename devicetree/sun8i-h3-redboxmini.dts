@@ -1,5 +1,5 @@
 
-// This build is a rework of redbox mini 5 (#UlinProject24, mit/apache2) 
+// This build is a rework of redbox mini 5 (#UlinProject, 2024-2025, mit/apache2) 
 // and orange pi pc (Copyright (C) 2015 Chen-Yu Tsai <wens@csie.org>, gpl/x11(mit))
 //
 
@@ -44,7 +44,7 @@
  *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  *     OTHER DEALINGS IN THE SOFTWARE.
  */
-// + #UlinProject24
+// + #UlinProject 2024-2025
 
 /dts-v1/;
 #include "sun8i-h3.dtsi"
@@ -54,7 +54,7 @@
 #include <dt-bindings/input/input.h>
 
 / {
-	model = "RedBox Mini, H3, UlinProject";
+	model = "RedBox Mini, H3, V2, UlinProject";
 	compatible = "redbox,m-h3", "allwinner,sun8i-h3";
 
 	aliases {
@@ -140,13 +140,13 @@
 
 		opp-864000000 {
 			opp-hz = /bits/ 64 <864000000>;
-			opp-microvolt = <1120000	1120000 1310000>;
+			opp-microvolt = <1120000 1120000 1310000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-912000000 {
 			opp-hz = /bits/ 64 <912000000>;
-			opp-microvolt = <1120000	1120000 1310000>;
+			opp-microvolt = <1120000 1120000 1310000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
@@ -176,61 +176,26 @@
 		
 		opp-1080000000 {
 			opp-hz = /bits/ 64 <1080000000>;
-			opp-microvolt = <1240000	1240000 1310000>;
+			opp-microvolt = <1240000 1240000 1310000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-1104000000 {
 			opp-hz = /bits/ 64 <1104000000>;
-			opp-microvolt = <1260000	1260000 1310000>;
+			opp-microvolt = <1260000 1260000 1310000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-1152000000 {
 			opp-hz = /bits/ 64 <1152000000>;
-			opp-microvolt = <1300000	1300000 1310000>;
+			opp-microvolt = <1300000 1300000 1310000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		 opp-1200000000 {
-                        opp-hz = /bits/ 64 <1200000000>;
-                        opp-microvolt = <1320000 1320000 1320000 >;
-                        clock-latency-ns = <244144>; /* 8 32k periods */
-                };
-	};
-	/delete-node/ thermal-zones;
-	thermal-zones {
-		cpu_thermal: cpu_thermal {
-			thermal-sensors = <&ths 0>;
-
-			polling-delay-passive = <1000>;
-			polling-delay = <10000>;
-
-			trips {
-				cpu_hot_trip: cpu-hot {
-					/* temperature = <90000>; !aosp VERSION! */
-					temperature = <80000>;
-					hysteresis = <2000>; /*aosp -0, OFF-2000?*/
-					type = "passive";
-				};
-
-				cpu_very_hot_trip: cpu-very-hot {
-					/* temperature = <100000>; !aosp VERSION, AND OFF! */
-					temperature = <95000>;
-					hysteresis = <0>;
-					type = "critical";
-				};
-			};
-
-			cooling-maps {
-				cpu-hot-limit {
-					trip = <&cpu_hot_trip>;
-					cooling-device = <&cpu0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-							 <&cpu1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-							 <&cpu2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-							 <&cpu3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-				};
-			};
+			opp-hz = /bits/ 64 <1200000000>;
+			opp-microvolt = <1320000 1320000 1320000 >;
+			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 	};
 	idle-states { // not finished!!!
@@ -299,6 +264,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -311,6 +277,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -323,6 +290,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -335,6 +303,7 @@
 	operating-points-v2 = <&cpu_opp_table>;
 	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
 	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
@@ -378,14 +347,6 @@
 &ir {
 	pinctrl-names = "default";
 	pinctrl-0 = <&r_ir_rx_pin>;
-	status = "okay";
-};
-
-&mmc0 { // sdcard
-	vmmc-supply = <&reg_vcc3v3>;
-	bus-width = <4>;
-	max-frequency = <50000000>;
-	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
 	status = "okay";
 };
 
@@ -436,7 +397,7 @@
 
 &usb_otg {
 	dr_mode = "otg";
-	status = "okay";
+	status = "disabled";
 };
 
 &usbphy {
@@ -461,15 +422,30 @@
 	clock-frequency = <200000>;
 };
 
-&mmc2 {
-	non-removable;
-	
-	bus-width = <8>;
-	max-frequency = <50000000>;
+&mmc0 { // sdcard
+	vmmc-supply = <&reg_vcc3v3>;
+	bus-width = <4>;
+	cd-gpios = <&pio 5 6 GPIO_ACTIVE_LOW>; /* PF6 */
+	status = "okay";
+};
+
+&mmc1 { // wifi
+	status = "disabled";
+};
+
+&mmc2 { // emmc
 	pinctrl-names = "default";
 	pinctrl-0 = <&mmc2_8bit_pins>;
-	status = "okay";
 	vmmc-supply = <&reg_vcc3v3>;
+	bus-width = <8>;
+	non-removable;
+	cap-mmc-hw-reset;
+	status = "okay";
+};
 
-	mmc-ddr-3_3v;
+&mmc2_8bit_pins {
+	/* Increase drive strength for DDR modes */
+	drive-strength = <40>;
+	/* eMMC is missing pull-ups */
+	bias-pull-up;
 };

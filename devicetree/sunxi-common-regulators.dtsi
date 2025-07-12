@@ -109,4 +109,3 @@
 		regulator-max-microvolt = <5000000>;
 	};
 };
-

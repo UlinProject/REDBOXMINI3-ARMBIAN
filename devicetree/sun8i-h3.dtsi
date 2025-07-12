@@ -333,4 +333,3 @@
 &sid {
 	compatible = "allwinner,sun8i-h3-sid";
 };
-
