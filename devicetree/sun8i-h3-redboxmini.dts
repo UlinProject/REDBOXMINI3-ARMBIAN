@@ -168,82 +168,69 @@
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
-		opp-1056000000 {
+		/*opp-1056000000 {
 			opp-hz = /bits/ 64 <1056000000>;
 			opp-microvolt = <1240000 1240000 1310000>;
-			clock-latency-ns = <244144>; /* 8 32k periods */
+			clock-latency-ns = <244144>;
 		};
 		
 		opp-1080000000 {
 			opp-hz = /bits/ 64 <1080000000>;
 			opp-microvolt = <1240000 1240000 1310000>;
-			clock-latency-ns = <244144>; /* 8 32k periods */
+			clock-latency-ns = <244144>;
 		};
 
 		opp-1104000000 {
 			opp-hz = /bits/ 64 <1104000000>;
 			opp-microvolt = <1260000 1260000 1310000>;
-			clock-latency-ns = <244144>; /* 8 32k periods */
+			clock-latency-ns = <244144>;
 		};
 
 		opp-1152000000 {
 			opp-hz = /bits/ 64 <1152000000>;
 			opp-microvolt = <1300000 1300000 1310000>;
-			clock-latency-ns = <244144>; /* 8 32k periods */
+			clock-latency-ns = <244144>;
 		};
 
-		 opp-1200000000 {
+		opp-1200000000 {
 			opp-hz = /bits/ 64 <1200000000>;
 			opp-microvolt = <1320000 1320000 1320000 >;
-			clock-latency-ns = <244144>; /* 8 32k periods */
-		};
+			clock-latency-ns = <244144>;
+		};*/
 	};
-	idle-states { // not finished!!!
-		entry-method = "arm,psci";
+	// does not working
+	// not finished!!!
+	idle-states {
+		entry-method = "psci";
 
-		idle_cpu_sleep: cpu-sleep {
+		cpu_sleep: cpu-sleep {
 			compatible = "arm,idle-state";
-
-			arm,psci-suspend-param = <0x10000>;
-			entry-latency-us = <0x28>;
-			exit-latency-us = <0x64>;
-			min-residency-us = <0x96>;
-
 			local-timer-stop;
+			entry-latency-us = <800>;
+			exit-latency-us = <1500>;
+			min-residency-us = <25000>;
+			arm,psci-suspend-param = <0x00010003>;
 		};
 
-		idle_cluster_sleep: cluster-sleep {
+		cluster_sleep: cluster-sleep {
 			compatible = "arm,idle-state";
-
-			arm,psci-suspend-param = <0x1010000>;
-			entry-latency-us = <0x1f4>;
-			exit-latency-us = <0x3e8>;
-			min-residency-us = <0x9c4>;
-
 			local-timer-stop;
-		};
-
-		idle_sys_sleep: sys-sleep {
-			compatible = "arm,idle-state";
-
-			arm,psci-suspend-param = <0x2010000>;
-			entry-latency-us = <0x3e8>;
-			exit-latency-us = <0x7d0>;
-			min-residency-us = <0x1194>;
-
-			local-timer-stop;
+			entry-latency-us = <850>;
+			exit-latency-us = <1500>;
+			min-residency-us = <50000>;
+			arm,psci-suspend-param = <0x01010013>;
 		};
 	};
 	cpus {
-		l2: l2-cache0 {
+		// does not working
+		l2: l2-cache {
 			compatible = "cache";
-			cache-unified;
-			cache-size = <262144>;
-			cache-line-size = <64>;
-			cache-sets = <512>;
-			associativity = <8>;
 			cache-level = <2>;
+			cache-size = <524288>;
+			cache-line-size = <32>;
+			cache-unified;
 		};
+
 	};
 };
 
@@ -260,55 +247,59 @@
 };
 
 &cpu0 {
+	clock-latency-ns = <244144>; /* 8 32k periods */
 	cpu-supply = <&reg_vdd_cpux>;
 	operating-points-v2 = <&cpu_opp_table>;
-	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
-	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	cpu-idle-states = <&cpu_sleep>, <&cluster_sleep>;
 	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
 	i-cache-line-size = <32>;
 	next-level-cache = <&l2>;
+	enable-method = "psci";
 };
 
 &cpu1 {
+	clock-latency-ns = <244144>; /* 8 32k periods */
 	cpu-supply = <&reg_vdd_cpux>;
 	operating-points-v2 = <&cpu_opp_table>;
-	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
-	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	cpu-idle-states = <&cpu_sleep>, <&cluster_sleep>;
 	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
 	i-cache-line-size = <32>;
 	next-level-cache = <&l2>;
+	enable-method = "psci";
 };
 
 &cpu2 {
+	clock-latency-ns = <244144>; /* 8 32k periods */
 	cpu-supply = <&reg_vdd_cpux>;
 	operating-points-v2 = <&cpu_opp_table>;
-	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
-	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	cpu-idle-states = <&cpu_sleep>, <&cluster_sleep>;
 	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
 	i-cache-line-size = <32>;
 	next-level-cache = <&l2>;
+	enable-method = "psci";
 };
 
 &cpu3 {
+	clock-latency-ns = <244144>; /* 8 32k periods */
 	cpu-supply = <&reg_vdd_cpux>;
 	operating-points-v2 = <&cpu_opp_table>;
-	cpu-idle-states = <&idle_cpu_sleep &idle_cluster_sleep &idle_sys_sleep>;
-	sleep-states = "sleep deep-sleep suspend-to-ram suspend-to-disk";
+	cpu-idle-states = <&cpu_sleep>, <&cluster_sleep>;
 	// does not working
 	d-cache-size = <32768>;
 	d-cache-line-size = <32>;
 	i-cache-size = <32768>;
 	i-cache-line-size = <32>;
 	next-level-cache = <&l2>;
+	enable-method = "psci";
 };
 
 &ehci0 {
