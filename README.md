@@ -24,27 +24,33 @@
 | CPU | Allwinner H3 (armvh7, x4, 0.2Ghz-1.01Ghz) |
 | MEM | 1GB (DDR3, ~624Mhz) |
 | Eth | Internal (100mbit) |
-| WI-FI | XR819 (was not considered) |
+| WI-FI | XR819 |
 | EMMC | FORESEE MCEMAM6G-08G (booting from it works and tested on uboot-orange-pi-pc-plus) |
 | USB | x2 2.0, (works, presumably the board has contacts for additional USB, This version does not have USB power management (it is always on)) |
-| GPIO | LED_PWR (1c20800, 15-PA15), LED_STATUS (1f02c00, 362-PL10), IR (1f02c00, 363-PL11), KEY_RESET (1f02c00, 355-PL3) (On this board you can get absolutely any gpio that is available on allwinner h3 (I’m just giving a list of those pins that you can get without much effort).) |
+| GPIO | LED_PWR (1c20800, 15-PA15), LED_STATUS (1f02c00, 362-PL10), IR (1f02c00, 363-PL11), KEY_RESET (1f02c00, 355-PL3) |
 
 ## UART (DEBUG)
 
-#### * V3 (115200, 3.3, image for allwinner h3 is identical to allwinner h5)
+#### * V3 (115200, 3.3)
 
 <img src="./img/V1_uart.jpg" width="20%"></img>
 
 ## Status
+<details open> 
+  <summary><b># V2 (stable)</b></summary>
+  <div>&nbsp;&nbsp;&nbsp;-&nbsp;Fully working machine based on x32 armbian, surprisingly much cooler than h5 version. Performance is more than enough for undemanding devices.</div>
+</details>
 
-Fully working machine (without wifi chip) based on x32 armbian, surprisingly much cooler than h5 version. Performance is more than enough for undemanding devices.
+<details open> 
+  <summary><b># V1 (stable)</b></summary>
+  <div>&nbsp;&nbsp;&nbsp;-&nbsp;Fully working machine (without wifi chip) based on x32 armbian, surprisingly much cooler than h5 version. Performance is more than enough for undemanding devices.</div>
+</details>
+
 
 ## Quick Answers to Questions
 
-#### • Will there be support for 1.2/1.5 GHz processor frequencies?
+<details open> 
+  <summary><b># Will there be support for 1.2/1.5 GHz processor frequencies?</b></summary>
+  <div>&nbsp;&nbsp;&nbsp;-&nbsp;These devices use a constant 1.1V voltage, which cannot be adjusted. This means that higher processor frequencies like 1.2/1.5 GHz are not achievable.</div>
+</details>
 
-These devices use a constant 1.1V voltage, which cannot be adjusted. This means that higher processor frequencies like 1.2/1.5 GHz are not achievable. 
-
-#### • Will there be WI-FI support?
-
-WI-FI support is not currently available due to difficulties in obtaining compatible driver code. The chip itself is not very efficient for wireless communication, so wired connections (Ethernet or USB Wi-Fi) are preferred.
