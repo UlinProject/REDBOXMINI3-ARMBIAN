@@ -1,5 +1,5 @@
 
-// This build is a rework of redbox mini 5 (#UlinProject, 2024-2025, mit/apache2) 
+// This build is a rework of redbox mini 5 (#UlinProject, 2024-2025, mit) 
 // and orange pi pc (Copyright (C) 2015 Chen-Yu Tsai <wens@csie.org>, gpl/x11(mit))
 //
 
@@ -53,12 +53,25 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 
+/*
+ PL0 - WLANREGON
+ PL1 - BTRST ??? here he does not participate in dt
+ PL2 - DC-DC USB (5V)
+ PL3 - BIG BUTTON
+ PL7 - DC-DC WIFI 1.8V (3.3V?)
+ PL8 - DC-DC CPU (1.1V) here he does not participate in dt, always active
+ PL9 - DC-DC DDR3 (1.5V) here he does not participate in dt, always active
+ PL10 - BLUE LED
+ PA15 - RED LED
+*/
+
 / {
 	model = "RedBox Mini, H3, V2, UlinProject";
 	compatible = "redbox,m-h3", "allwinner,sun8i-h3";
 
 	aliases {
 		ethernet0 = &emac;
+		ethernet1 = &xr819wifi;
 		serial0 = &uart0;
 	};
 
@@ -81,14 +94,14 @@
 		compatible = "gpio-leds";
 
 		pwr_led {
-			label = "redbox:green:pwr";
-			gpios = <&r_pio 0 10 GPIO_ACTIVE_HIGH>;
+			label = "redbox:blue:pwr";
+			gpios = <&r_pio 0 10 GPIO_ACTIVE_HIGH>; /* PL10 */
 			default-state = "on";
 		};
 
 		status_led {
 			label = "redbox:red:status";
-			gpios = <&pio 0 15 GPIO_ACTIVE_HIGH>;
+			gpios = <&pio 0 15 GPIO_ACTIVE_HIGH>; /* PA15 LED_PWR */
 		};
 	};
 
@@ -98,7 +111,7 @@
 		switch-4 {
 			label = "sw4";
 			linux,code = <KEY_RESTART>;
-			gpios = <&r_pio 0 3 GPIO_ACTIVE_LOW>;
+			gpios = <&r_pio 0 3 GPIO_ACTIVE_LOW>; /* PL3 */
 			wakeup-source;
 		};
 	};
@@ -106,8 +119,8 @@
 	reg_vdd_cpux: vdd-cpux {
 		compatible = "regulator-fixed";
 		regulator-name = "vdd-cpux";
-		regulator-min-microvolt = <1200000>;
-		regulator-max-microvolt = <1200000>; 
+		regulator-min-microvolt = <1200000>; /* real 1.1v */
+		regulator-max-microvolt = <1200000>; /* real 1.1v */
 		regulator-boot-on;
 		regulator-always-on;
 	};
@@ -116,85 +129,85 @@
 	cpu_opp_table: opp-table-cpu {
 		opp-408000000 {
 			opp-hz = /bits/ 64 <408000000>;
-			opp-microvolt = <1000000 1000000 1310000>;
+			opp-microvolt = <1000000 1000000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-648000000 {
 			opp-hz = /bits/ 64 <648000000>;
-			opp-microvolt = <1040000 1040000 1310000>;
+			opp-microvolt = <1040000 1040000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-792000000 {
 			opp-hz = /bits/ 64 <792000000>;
-			opp-microvolt = <1080000 1080000 1310000>;
+			opp-microvolt = <1080000 1080000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-816000000 {
 			opp-hz = /bits/ 64 <816000000>;
-			opp-microvolt = <1080000 1080000 1310000>;
+			opp-microvolt = <1080000 1080000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-864000000 {
 			opp-hz = /bits/ 64 <864000000>;
-			opp-microvolt = <1120000 1120000 1310000>;
+			opp-microvolt = <1120000 1120000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-912000000 {
 			opp-hz = /bits/ 64 <912000000>;
-			opp-microvolt = <1120000 1120000 1310000>;
+			opp-microvolt = <1120000 1120000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-936000000 {
 			opp-hz = /bits/ 64 <936000000>;
-			opp-microvolt = <1160000 1160000 1310000>;
+			opp-microvolt = <1160000 1160000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-960000000 {
 			opp-hz = /bits/ 64 <960000000>;
-			opp-microvolt = <1160000 1160000 1310000>;
+			opp-microvolt = <1160000 1160000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		opp-1008000000 {
 			opp-hz = /bits/ 64 <1008000000>;
-			opp-microvolt = <1200000 1200000 1310000>;
+			opp-microvolt = <1200000 1200000 1300000>;
 			clock-latency-ns = <244144>; /* 8 32k periods */
 		};
 
 		/*opp-1056000000 {
 			opp-hz = /bits/ 64 <1056000000>;
-			opp-microvolt = <1240000 1240000 1310000>;
+			opp-microvolt = <1240000 1240000 1300000>;
 			clock-latency-ns = <244144>;
 		};
 		
 		opp-1080000000 {
 			opp-hz = /bits/ 64 <1080000000>;
-			opp-microvolt = <1240000 1240000 1310000>;
+			opp-microvolt = <1240000 1240000 1300000>;
 			clock-latency-ns = <244144>;
 		};
 
 		opp-1104000000 {
 			opp-hz = /bits/ 64 <1104000000>;
-			opp-microvolt = <1260000 1260000 1310000>;
+			opp-microvolt = <1260000 1260000 1300000>;
 			clock-latency-ns = <244144>;
 		};
 
 		opp-1152000000 {
 			opp-hz = /bits/ 64 <1152000000>;
-			opp-microvolt = <1300000 1300000 1310000>;
+			opp-microvolt = <1300000 1300000 1300000>;
 			clock-latency-ns = <244144>;
 		};
 
 		opp-1200000000 {
 			opp-hz = /bits/ 64 <1200000000>;
-			opp-microvolt = <1320000 1320000 1320000 >;
+			opp-microvolt = <1320000 1320000 1320000>;
 			clock-latency-ns = <244144>;
 		};*/
 	};
@@ -230,7 +243,22 @@
 			cache-line-size = <32>;
 			cache-unified;
 		};
+	};
 
+	pwrseq_wifi: pwrseq_wifi@0 {
+		compatible = "mmc-pwrseq-simple";
+		reset-gpios = <&r_pio 0 0 GPIO_ACTIVE_LOW>; /* PL0 wlan_regon */
+		post-power-on-delay-ms = <200>;
+	};
+
+	vdd_wifi: vdd_wifi {
+		compatible = "regulator-fixed";
+		regulator-min-microvolt = <3300000>; // 1800000?!
+		regulator-max-microvolt = <3300000>;
+		regulator-name = "vcc-wifi";
+		gpio = <&r_pio 0 7 GPIO_ACTIVE_LOW>; /* PL7 , dc-dc 1.8V */
+		startup-delay-us = <70000>;
+		enable-active-high;
 	};
 };
 
@@ -357,8 +385,8 @@
 	status = "okay";
 };
 
-&reg_usb0_vbus { // TODO, this build does not have USB power management (suggested to dummy or delete)
-	gpio = <&r_pio 0 2 GPIO_ACTIVE_HIGH>; /* PL2 */
+&reg_usb0_vbus { // TODO, there is usually no USB power management in this build.
+	gpio = <&r_pio 0 2 GPIO_ACTIVE_HIGH>; /* PL2 USB DC/DC (5V) */
 	status = "okay";
 };
 
@@ -392,7 +420,7 @@
 };
 
 &usbphy {
-	usb0_id_det-gpios = <&pio 6 12 GPIO_ACTIVE_HIGH>; /* PG12 */
+	// usb0_id_det-gpios = <&pio 6 12 GPIO_ACTIVE_HIGH>; /* PG12 */
 	usb0_vbus-supply = <&reg_usb0_vbus>;
 	/* VBUS on USB host ports are always on */
 	status = "okay";
@@ -421,7 +449,21 @@
 };
 
 &mmc1 { // wifi
-	status = "disabled";
+	pinctrl-names = "default";
+	vmmc-supply = <&vdd_wifi>;
+	bus-width = <4>;
+	mmc-pwrseq = <&pwrseq_wifi>;
+	non-removable;
+	status = "okay";
+
+	xr819wifi: sdio_wifi@1 {
+		reg = <0x01>;
+		compatible = "xradio,xr819";
+		interrupt-parent = <&pio>;
+		interrupts = <6 10 IRQ_TYPE_EDGE_RISING>;
+		interrupt-names = "host-wake";
+		local-mac-address = [dc 44 6d c0 ff ee];
+	};
 };
 
 &mmc2 { // emmc
@@ -440,3 +482,4 @@
 	/* eMMC is missing pull-ups */
 	bias-pull-up;
 };
+
