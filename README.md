@@ -54,3 +54,16 @@
   <div>&nbsp;&nbsp;&nbsp;-&nbsp;These devices use a constant 1.1V voltage, which cannot be adjusted. This means that higher processor frequencies like 1.2/1.5 GHz are not achievable.</div>
 </details>
 
+<details> 
+  <summary><b># What driver can I use to make Wi-Fi work?</b></summary>
+  <div>&nbsp;&nbsp;&nbsp;-&nbsp;Assemble and connect the module: https://github.com/fifteenhex/xradio
+    
+  example_how_to_assemble_and_install:
+    ```
+    make ARCH=arm -C /usr/src/linux-headers-6.12.43-current-sunxi/ M=$PWD modules;
+    make ARCH=arm -C /usr/src/linux-headers-6.12.43-current-sunxi/ M=$PWD INSTALL_MOD_PATH=/usr modules_install;
+    ```
+    
+  Use dtb version V2 from this repository.
+  </div>
+</details>
