@@ -1,10 +1,37 @@
+# make
+# OR:
+# make default-noturbo
+# make turbomod
 
-dtbs: 
-	mkdir -p ./out &> /dev/null
-	rm -R ./out/* &> /dev/null &
-	wait
+OUT_DIR   := ./out
+CPP_FLAGS := -nostdinc -I include -I ./ -undef -x assembler-with-cpp
+DTC_FLAGS := -I dts -O dtb -p 0x1000
 
-	cpp -nostdinc -I include -I ./  -undef -x assembler-with-cpp  sun8i-h3-redboxmini.dts ./out/preprocessed
-	dtc -I dts -O dtb -p 0x1000 ./out/preprocessed -o ./out/sun8i-h3-redboxmini.dtb
+.PHONY: default all default-noturbo turbomod clean
 
-	cp ./out/sun8i-h3-redboxmini.dtb ../
+default: default-noturbo
+
+all: default-noturbo turbomod
+
+default-noturbo: build-noturbodef
+turbomod: build-turbo
+
+build-%: sun8i-h3-redboxmini-%.dts
+	@echo "============================================="
+	@echo " [BUILD] Configuration: $*"
+	@echo " [FROM]  $<"
+	@echo "============================================="
+	@echo ""
+	@mkdir -p $(OUT_DIR)
+	@rm -rf $(OUT_DIR)/*
+
+	cpp $(CPP_FLAGS) $< $(OUT_DIR)/preprocessed
+	dtc $(DTC_FLAGS) $(OUT_DIR)/preprocessed -o $(OUT_DIR)/sun8i-h3-redboxmini.dtb
+
+	@echo " [COPY]  Output file copied to: ../sun8i-h3-redboxmini.dtb"
+	@cp $(OUT_DIR)/sun8i-h3-redboxmini.dtb ../
+	@echo " [DONE]  Build for $* completed successfully."
+	@echo ""
+
+clean:
+	rm -rf $(OUT_DIR)
