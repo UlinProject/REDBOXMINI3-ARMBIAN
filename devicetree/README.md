@@ -1,23 +1,25 @@
-### devicetree
+### DeviceTree
 
-## Usage
-```
-make
-```
+### Usage
 
-## License
+Use the following commands to build the required DeviceTree configuration: 
 
-### *file: ./sunxi-h3-h5.dtsi
-Downloaded from open sources, no changes, licenses saved.
+| cmd           | info                                                                                                          |
+| ------------- | ------------------------------------------------------------------------------------------------------------- |
+| ```make```          | Build a standard classic DeviceTree for this device                                                             |
+| ```make turbomod``` | Build a modified DeviceTree with turbo mode support (1.3V / 1.2GHz) |
 
-### *file: ./sun8i-h3.dtsi
-Downloaded from open sources, no changes, licenses saved.
+### License and Sources
 
-### *file: ./sunxi-common-regulators.dtsi
-Downloaded from open sources, no changes, licenses saved.
+All foundational files are sourced from official upstream repositories. Original licenses and copyright notices are preserved without modifications. 
 
-### *dir: ./arm
-Downloaded from open sources, no changes, licenses saved.
+### Upstream Directories
 
-### *dir: ./dt-bindings
-Downloaded from open sources, no changes, licenses saved.
+* arm/ - Core ARM architecture devicetree directories
+* dt-bindings/ - Standard device tree binding definitions
+
+### Upstream Files
+
+* sunxi-h3-h5.dtsi - Base Allwinner H3/H5 SoC configuration
+* sun8i-h3.dtsi - Specific Allwinner H3 SoC definitions
+* sunxi-common-regulators.dtsi - Common voltage regulator setups
