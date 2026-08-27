@@ -14,7 +14,7 @@ No DeviceTree modifications are required. Both the standard and turbo-mode Devic
 
 1. Remove the two **0 resistors** (jumpers) that bypass the 5V line.
 2. Solder the **SY6280AAC** IC onto its designated footprint on the PCB.
-3. Populate the missing resistor pads: place the **2 kOm resistor** in the upper slot and the **10 kΩ resistor** in the slot below it.
+3. Populate the missing resistor pads: place the **2 kOm resistor** in the upper slot and the **10 kOm resistor** in the slot below it.
 4. Bridge the capacitor group pads with a **jumper wire**. This is necessary because the board layout originally allocated an individual SY6280AAC per USB port.
 
 <img src="./control_power_usb.jpg" width="60%"></img>
