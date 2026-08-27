@@ -21,12 +21,13 @@
 
 | name | value |
 | ---- | ----- |
-| CPU | Allwinner H3 (armvh7, x4, 0.2Ghz-1.01Ghz) |
+| CPU | Allwinner H3 (armvh7, x4, 0.2Ghz-1.01Ghz <b>OR</b> 0.2Ghz-1.2Ghz in <a href="./mods/turbomode.md">turbo mode</a>) |
 | MEM | 1GB (DDR3, ~624Mhz) |
+| Bootloader |  <i>You need to build your own, but you can just use one from an Orange Pi PC</i> |
 | Eth | Internal (100mbit) |
 | WI-FI | XR819 |
 | EMMC | FORESEE MCEMAM6G-08G (booting from it works and tested on uboot-orange-pi-pc-plus) |
-| USB | x2 2.0, (works, presumably the board has contacts for additional USB, This version does not have USB power management (it is always on)) |
+| USB | x2 2.0, (works, presumably the board has contacts for additional USB, This version does not have USB power management (it is always on) <b>OR</b> use a <a href="./mods/usbpowermode.md">mod</a> to manage usb power) |
 | GPIO | LED_PWR (1c20800, 15-PA15), LED_STATUS (1f02c00, 362-PL10), IR (1f02c00, 363-PL11), KEY_RESET (1f02c00, 355-PL3) |
 
 ## UART (DEBUG)
