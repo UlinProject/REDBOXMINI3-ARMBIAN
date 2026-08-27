@@ -17,6 +17,9 @@ No DeviceTree modifications are required. Both the standard and turbo-mode Devic
 3. Populate the missing resistor pads: place the **2 kOm resistor** in the upper slot and the **10 kΩ resistor** in the slot below it.
 4. Bridge the capacitor group pads with a **jumper wire**. This is necessary because the board layout originally allocated an individual SY6280AAC per USB port.
 
+<img src="./control_power_usb.jpg" width="60%"></img>
+
+
 ### Verification and Testing
 
 To verify the modification, you can use either of the following methods: 
@@ -24,4 +27,3 @@ To verify the modification, you can use either of the following methods: 
 * **Visual Method:** Insert a USB flash drive equipped with an LED indicator. The LED must remain completely off until the Linux kernel begins loading.
 * **Command Line Method:** Boot into the U-Boot environment and manually cycle the power rail by toggling the **PL2** pin using the gpio toggle command.
 
-* <img src="./control_power_usb.jpg" width="60%"></img>
