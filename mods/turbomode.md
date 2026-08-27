@@ -10,7 +10,7 @@ This solution is designed for stable operation and does not involve extreme over
 
 An alternative, simplified modification to lock the CPU at a constant 1.2 GHz without dynamic voltage scaling: 
 
-1. Solder a **30 kΩ resistor** between the ground plane (**GND**) and the feedback loop (**FB**) of the power regulator.
+1. Solder a **30 kOm resistor** between the ground plane (**GND**) and the feedback loop (**FB**) of the power regulator.
 2. Compile and apply the DeviceTree with turbo mode enabled (make turbomod).
 
 **Technical Limitation:** The DeviceTree governor will only manage the CPU frequency. Dynamic 1.1V / 1.3V voltage switching is not available in this configuration, but the processor will consistently achieve the targeted 1.2 GHz frequency. 
@@ -25,12 +25,12 @@ This hardware setup enables fully dynamic voltage scaling. The DeviceTree manage
 ### Required Components
 
 * **N-Channel MOSFET:** BSN20 (A common BSS138, often found on logic level converters, can be used as a direct alternative and is fully sufficient for this circuit).
-* **Resistor:** 30 kΩ (An SMD resistor is recommended, though a standard 1% metal-film resistor like MF-25 will work perfectly).
+* **Resistor:** 30 kOm (An SMD resistor is recommended, though a standard 1% metal-film resistor like MF-25 will work perfectly).
 * **Wiring:** Fine enamel/wrapping wire for the control line and a standard jumper/wire for the ground connection.
 
 ### Assembly Instructions
 
-1. Solder one side of the 30 kΩ resistor to the feedback (**FB**) line of the voltage regulator.
+1. Solder one side of the 30 kOm resistor to the feedback (**FB**) line of the voltage regulator.
 2. Solder the remaining lead of this resistor to the **Drain (Pin 3)** of the MOSFET.
 3. Connect the control wire to the **Gate (Pin 1)** of the MOSFET.
 4. Connect the **Source (Pin 2)** of the MOSFET to the ground plane (**GND**).
@@ -40,4 +40,5 @@ This hardware setup enables fully dynamic voltage scaling. The DeviceTree manage
 
 <img src="./turbomode-full.jpg" width="60%"></img>
 
+<img src="./turbomode-full2.jpg" width="60%"></img>
 
