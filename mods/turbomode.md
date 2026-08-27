@@ -15,7 +15,7 @@ An alternative, simplified modification to lock the CPU at a constant 1.2 GHz wi
 
 **Technical Limitation:** The DeviceTree governor will only manage the CPU frequency. Dynamic 1.1V / 1.3V voltage switching is not available in this configuration, but the processor will consistently achieve the targeted 1.2 GHz frequency. 
 
-<img src="./mods/turbomode-demo-uncontrolled.jpg" width="60%"></img>
+<img src="./turbomode-demo-uncontrolled.jpg" width="60%"></img>
 
 
 ## Full Dynamic Power Management (1.1V / 1.3V)
@@ -38,6 +38,6 @@ This hardware setup enables fully dynamic voltage scaling. The DeviceTree manage
 
 *Note: Component placement is flexible. You may orient and position the transistor and resistor in any layout that fits your specific board space.*
 
-<img src="./mods/turbomode-full.jpg" width="60%"></img>
+<img src="./turbomode-full.jpg" width="60%"></img>
 
 
