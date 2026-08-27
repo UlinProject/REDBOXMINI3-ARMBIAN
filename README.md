@@ -52,6 +52,8 @@
 <details open> 
   <summary><b># Will there be support for 1.2/1.5 GHz processor frequencies?</b></summary>
   <div>&nbsp;&nbsp;&nbsp;-&nbsp;These devices use a constant 1.1V voltage, which cannot be adjusted. This means that higher processor frequencies like 1.2/1.5 GHz are not achievable.</div>
+
+  <b>>> It is being fixed, the modification is described in "<a href="./mods/turbomode.md">mods/turbomode.md</a>".</b>
 </details>
 
 <details> 
